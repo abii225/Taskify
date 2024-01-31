@@ -58,7 +58,7 @@ const Login: React.FC = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            console.log(user);
+            // console.log(user);
             // signin success
             toast.success("Login Success!", {
               position: "bottom-center",

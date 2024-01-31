@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.checkbox{
+    appearance: none;
+    width:10px;
+    height:10px;
+    display:inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+.checkbox:checked{
+    background-color: blue;
+}
+
+.checkbox::before{
+    position:absolute;
+    content:"\2713";
+    font-size: 30px;
+    transform: scale(0);
+}

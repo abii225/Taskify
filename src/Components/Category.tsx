@@ -1,62 +1,106 @@
 import React, { useContext, useEffect, useState } from "react";
 import Todolist from "./Todolist";
 import { AuthContext } from "../Context/AuthContextApi";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../Firebase/firebase";
-interface todo {
+import { onSnapshot } from "firebase/firestore";
+
+export interface todo {
   name: string;
   priority: string;
   date: string;
   completed: boolean;
   note: string;
+  userId: string;
 }
 const Category: React.FC = () => {
   const { user }: any = useContext(AuthContext);
-  useEffect(() => {
-    console.log(user, "from adding page");
-  }, [user]);
+  useEffect(() => {}, [user]);
   const [activeTab, setActiveTab] = useState("progress");
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
+  // ======================================== get allTodos =============
+  const [allTodo, setAllTodo] = useState([]);
 
+  useEffect(() => {
+    const fetchAllTodos = async () => {
+      try {
+        const q = query(
+          collection(db, "todos"),
+          where("userId", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+        });
+      } catch (error: any) {
+        console.error("Error fetching todos:", error.message);
+      }
+    };
+
+    fetchAllTodos();
+  }, [user, activeTab]);
   // =================================== Add Todo =================
   const [todo, setTodo] = useState<todo>({
     name: "",
-    priority: "",
+    priority: "low",
     date: "",
     note: "",
     completed: false,
+    userId: user.uid,
   });
 
   const addtoFirebase = async () => {
-    console.log(todo);
-    console.log(user, user.uid, todo);
-    // return;
-    // Add a new document in collection "cities"
-    await setDoc(doc(db, "todos", user.uid), todo);
+    try {
+      const newCityRef = doc(collection(db, "todos"));
+
+      // later...
+      await setDoc(newCityRef, todo);
+
+      return setTodo({
+        name: "",
+        priority: "",
+        date: "",
+        note: "",
+        completed: false,
+        userId: user.uid,
+      });
+    } catch (err) {
+      alert("Error on adding new todos");
+    }
   };
   return (
     <div className="max-w-[1600px] mx-auto">
-      <nav className=" w-[90%] max-w-[1600px] mx-auto relative z-0 flex border rounded-md overflow-hidden  my-[30px]">
+      <nav className=" w-[90%] max-w-[1600px] mx-auto relative z-0 flex border rounded-md overflow-hidden text-white my-[30px]">
         <button
           type="button"
           className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
             activeTab === "progress"
-              ? "border-blue-600 bg-white text-gray-900"
-              : "border-transparent bg-gray-50 text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-blue-900 text-white"
+              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("progress")}
         >
-          In Progress
+          Progress
         </button>
         <button
           type="button"
           className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
             activeTab === "completed"
-              ? "border-blue-600 bg-white text-gray-900"
-              : "border-transparent bg-gray-50 text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-blue-900 text-white"
+              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("completed")}
         >
@@ -66,8 +110,8 @@ const Category: React.FC = () => {
           type="button"
           className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
             activeTab === "add"
-              ? "border-blue-600 bg-white text-gray-900"
-              : "border-transparent bg-gray-50 text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-blue-900 text-white"
+              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("add")}
         >
@@ -106,6 +150,7 @@ const Category: React.FC = () => {
             <input
               className="block mx-auto w-[90%] outline-none focus:outline-none border-b-2 border-blue-600 p-3 h-[50px] font-primary text-black text-[18px]"
               type="text"
+              value={todo.name}
               name=""
               id=""
               onChange={(e) =>
@@ -118,52 +163,6 @@ const Category: React.FC = () => {
 
             <div className=" max-w-[500px] mx-auto  flex flex-col md:flex-row justify-center">
               <div className="">
-                {/* <div className="w-[100%] h-[50px]  bg-green-600 mx-auto flex justify-between p-2 rounded-md">
-                <h2 className="text-[20px] font-primary text-white"> Low</h2>
-                <input
-                  className="w-[25px]"
-                  type="checkbox"
-                  name=""
-                  value="Low"
-                  id=""
-                  onChange={(e) =>
-                    setTodo((prev) => {
-                      return { ...prev, priority: e.target.value };
-                    })
-                  }
-                />
-              </div>
-              <div className="w-[100%] h-[50px]  bg-yellow-600 mx-auto flex justify-between p-2 rounded-md">
-                <h2 className="text-[20px] font-primary text-white"> Medium</h2>
-                <input
-                  className="w-[25px]"
-                  type="checkbox"
-                  value="Medium"
-                  name=""
-                  id=""
-                  onChange={(e) =>
-                    setTodo((prev) => {
-                      return { ...prev, priority: e.target.value };
-                    })
-                  }
-                />
-              </div>
-              <div className="w-[100%] h-[50px]  bg-red-500 mx-auto flex justify-between p-2 rounded-md">
-                <h2 className="text-[20px] font-primary text-white"> High</h2>
-                <input
-                  className="w-[25px]"
-                  type="checkbox"
-                  value="High"
-                  name=""
-                  id=""
-                  onChange={(e) =>
-                    setTodo((prev) => {
-                      return { ...prev, priority: e.target.value };
-                    })
-                  }
-                />
-              </div> */}
-
                 <div className="max-w-[200px] h-[50px] mx-auto flex justify-between gap-3 p-2 rounded-md">
                   <h2 className="text-[20px] font-primary text-white">
                     Priority
