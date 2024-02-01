@@ -30,28 +30,7 @@ const Category: React.FC = () => {
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
-  // ======================================== get allTodos =============
-  const [allTodo, setAllTodo] = useState([]);
 
-  useEffect(() => {
-    const fetchAllTodos = async () => {
-      try {
-        const q = query(
-          collection(db, "todos"),
-          where("userId", "==", user.uid)
-        );
-        const querySnapshot = await getDocs(q);
-
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
-        });
-      } catch (error: any) {
-        console.error("Error fetching todos:", error.message);
-      }
-    };
-
-    fetchAllTodos();
-  }, [user, activeTab]);
   // =================================== Add Todo =================
   const [todo, setTodo] = useState<todo>({
     name: "",
