@@ -19,7 +19,16 @@ const Profile: React.FC = () => {
       });
   };
   return (
-    <div>
+    <div className="min-h-[600px]">
+      <div className="min-w-[250px] max-w-[350px] h-[400px] bg-red-700 flex items-center justify-center align-middle">
+        <img
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          className="w-[80%] h-[80%] object-contain rounded-md"
+          alt=""
+        />
+      </div>
+      username: <br />
+      update password:
       <button
         className="w-[200px] h-[50px] bg-red-600"
         onClick={(e) => SignOutUser(e)}

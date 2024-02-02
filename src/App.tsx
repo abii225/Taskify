@@ -7,7 +7,7 @@ import Allroutes from "./Routes/Allroutes";
 function App() {
   return (
     <>
-      <div className="bg-table">
+      <div className="bg-body">
         <Navbar />
         <Allroutes />
         <Footer />

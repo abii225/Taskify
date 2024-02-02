@@ -34,7 +34,7 @@ const Category: React.FC = () => {
   // =================================== Add Todo =================
   const [todo, setTodo] = useState<todo>({
     name: "",
-    priority: "low",
+    priority: "Low",
     date: "",
     note: "",
     completed: false,
@@ -50,7 +50,7 @@ const Category: React.FC = () => {
 
       return setTodo({
         name: "",
-        priority: "",
+        priority: "Low",
         date: "",
         note: "",
         completed: false,
@@ -65,10 +65,10 @@ const Category: React.FC = () => {
       <nav className=" w-[90%] max-w-[1600px] mx-auto relative z-0 flex border rounded-md overflow-hidden text-white my-[30px]">
         <button
           type="button"
-          className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
+          className={`flex-1 p-2 text-center cursor-pointer border-b-2 ${
             activeTab === "progress"
-              ? "border-blue-600 bg-blue-900 text-white"
-              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-item2 text-[15px] md:text-[20px]  font-primary text-white"
+              : "border-transparent bg-white text-[15px] md:text-[20px] font-primary text-gray-600 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("progress")}
         >
@@ -76,10 +76,10 @@ const Category: React.FC = () => {
         </button>
         <button
           type="button"
-          className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
+          className={`flex-1 p-2 text-center cursor-pointer border-b-2 ${
             activeTab === "completed"
-              ? "border-blue-600 bg-blue-900 text-white"
-              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-item2 text-[15px] md:text-[20px] font-primary text-white"
+              : "border-transparent bg-white text-[15px] md:text-[20px] font-primary text-gray-600 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("completed")}
         >
@@ -87,10 +87,10 @@ const Category: React.FC = () => {
         </button>
         <button
           type="button"
-          className={`flex-1 py-2 px-4 text-center cursor-pointer border-b-2 ${
+          className={`flex-1 p-2 text-center cursor-pointer border-b-2 ${
             activeTab === "add"
-              ? "border-blue-600 bg-blue-900 text-white"
-              : "border-transparent bg-table text-gray-500 hover:text-gray-700"
+              ? "border-blue-600 bg-item2 text-[15px] md:text-[20px] font-primary text-white"
+              : "border-transparent bg-white text-[15px] md:text-[20px] font-primary text-gray-600 hover:text-gray-700"
           } focus:outline-none`}
           onClick={() => handleTabClick("add")}
         >
@@ -103,7 +103,7 @@ const Category: React.FC = () => {
           key="progress-container"
           className={`${
             activeTab === "progress" ? "" : "hidden"
-          } bg-black text-white`}
+          } bg-white text-white`}
         >
           <Todolist value={"progress"} />
         </div>
@@ -112,7 +112,7 @@ const Category: React.FC = () => {
           key="completed-container"
           className={`${
             activeTab === "completed" ? "" : "hidden"
-          } bg-black text-white`}
+          } bg-white text-white`}
         >
           <Todolist value={"completed"} />
         </div>
@@ -121,10 +121,11 @@ const Category: React.FC = () => {
           key="add-container"
           className={`${
             activeTab === "add" ? "" : "hidden"
-          } w-full h-full mb-8 bg-table rounded-md overflow-hidden p-4 text-white`}
+          } w-full h-full mb-8 bg-body rounded-md overflow-hidden p-4 text-white`}
         >
+          {/* =================================================  ADD NEW TASK ============================= */}
           {/* Your Add Task content goes here */}
-          <div className="w-[100%] lg:w-[60%]  min-h-[500px] bg-table mx-auto rounded-md overflow-hidden p-4 text-white">
+          <div className="w-[100%] lg:w-[60%]  min-h-[500px] bg-white mx-auto rounded-md overflow-hidden p-4 text-black">
             <h3 className="text-center font-primary text-[20px]">Task Name</h3>
             <input
               className="block mx-auto w-[90%] outline-none focus:outline-none border-b-2 border-blue-600 p-3 h-[50px] font-primary text-black text-[18px]"
@@ -143,7 +144,7 @@ const Category: React.FC = () => {
             <div className=" max-w-[500px] mx-auto  flex flex-col md:flex-row justify-center">
               <div className="">
                 <div className="max-w-[200px] h-[50px] mx-auto flex justify-between gap-3 p-2 rounded-md">
-                  <h2 className="text-[20px] font-primary text-white">
+                  <h2 className="text-[20px] font-primary text-black">
                     Priority
                   </h2>
                   <select
@@ -163,7 +164,7 @@ const Category: React.FC = () => {
               </div>
 
               <div className="max-w-[200px] h-[50px]  mx-auto flex  gap-3 p-2 rounded-md">
-                <h2 className="text-[20px] font-primary text-white">Target</h2>
+                <h2 className="text-[20px] font-primary text-black">Target</h2>
                 <input
                   className="bg-white text-black h-[30px] p-2 rounded-md outline-none focus:outline-none"
                   type="date"

@@ -61,7 +61,7 @@ const Edit: React.FC<EditProps> = ({ ele }) => {
   return (
     <>
       <div>
-        <Button className="bg-blue-900 " onClick={() => setOpenModal(true)}>
+        <Button className="bg-item2 p-0" onClick={() => setOpenModal(true)}>
           <FaRegEdit className="w-[20px] h-[20px]" />
         </Button>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>

@@ -12,6 +12,11 @@ export default {
         primary: `Poppins, sans-serif`,
       },
       colors: {
+        body: "#",
+        footer: "#B6FFFA",
+        item1: "#ffff",
+        item2: "#687EFF",
+        item3: "#EEEEEE",
         undefined: "#152643",
         table: "#152643",
       },

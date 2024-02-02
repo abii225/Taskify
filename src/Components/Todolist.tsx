@@ -68,9 +68,9 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
   //   e.target.checked = true;
   // };
   return (
-    <div className="w-[100%]  min-h-[400px]  bg-table grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="w-[100%]  min-h-[400px]  bg-body grid grid-cols-1 md:grid-cols-3 gap-3">
       {!allTodo.length && (
-        <h1 className="text-[30px] text-white font-primary text-center ">
+        <h1 className="text-[30px] text-black font-primary text-center ">
           Empty {value} tasklist
         </h1>
       )}
@@ -78,10 +78,10 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
       {allTodo.length &&
         allTodo.map((doc) => {
           return (
-            <div className="w-[100%] h-[200px] bg-blue-900 p-3 text-white rounded-md shadow-black shadow-md">
+            <div className="w-[100%] h-[200px] bg-item2 p-3 text-black rounded-md shadow-slate-300 shadow-md">
               <div className="w-[100%] h-[25px]  flex justify-between mb-2">
-                <h1 className="font-primary">{value}</h1>
-                <div className="  text-white text-[20px] flex items-center align-middle gap-4">
+                <h1 className="font-primary text-white">({value})</h1>
+                <div className="  text-[20px] flex items-center align-middle gap-4">
                   <Edit ele={doc} />
 
                   {/* =================== */}
@@ -93,23 +93,42 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
                   </button>
                 </div>
               </div>
-              <div className="w-[100%] h-[100px] overflow-y-scroll p-2 shadow-md scrollbar-thin scrollbar-track-table scrollbar-rounded-md scrollbar-thumb-slate-700 text-[14px] md:text-[16px] ">
+              <div className="w-[100%] h-[100px] overflow-y-scroll p-2 shadow-md scrollbar-thin scrollbar-track-table scrollbar-rounded-md scrollbar-thumb-slate-700 text-[14px] md:text-[16px] mt-[15px]">
                 {" "}
-                Name: <span>{doc.name}</span>
+                <span className="text-white font-primary underline">
+                  {" "}
+                  {doc.name}
+                </span>
                 <br />
-                Note:
-                <p>{doc.note}</p>
+                <span className="text-white font-primary underline">
+                  {" "}
+                  Note:
+                </span>
+                <p className="text-white font-primary">{doc.note}</p>
               </div>
               <div className="w-[100%] h-[50px]  mx-auto flex gap-2 justify-between items-center align-middle">
-                <div className="w-[100px] h-[30px] bg-slate-400 text-[15px] flex justify-center items-center align-middle gap-1 rounded-md p-2 shadow-slate-600">
-                  <h2 className="text-[15px] text-white font-primary">
+                <div
+                  className={`w-[100px] h-[30px]  text-[15px] flex justify-center items-center align-middle gap-1 rounded-md p-2 ${(() => {
+                    switch (doc.priority) {
+                      case "Low":
+                        return "bg-green-400";
+                      case "Medium":
+                        return "bg-yellow-400";
+                      case "High":
+                        return "bg-red-600";
+                      default:
+                        return "";
+                    }
+                  })()}`}
+                >
+                  <h2 className="text-[15px] text-white  font-primary">
                     {doc.priority}
                   </h2>
-                  <MdPriorityHigh />
+                  <MdPriorityHigh className="text-white" />
                 </div>
-                <div className="w-[150px] h-[30px] bg-slate-400 text-[15px] flex justify-center items-center align-middle gap-1 rounded-md p-2 shadow-slate-600">
+                <div className="w-[150px] h-[30px] bg-item3 text-[15px] flex justify-center items-center align-middle gap-1 rounded-md p-2 shadow-slate-600">
                   <FaFlag className="text-blue-700" />
-                  <h1 className="text-[12px] text-white font-primary">
+                  <h1 className="text-[12px] text-blue-700 font-primary">
                     {doc.date}
                   </h1>
                 </div>
