@@ -25,7 +25,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      return navigate("/");
+      navigate("/");
     }
   }, [user]);
 
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
             const errorCode = error.code;
             const errorMessage = error;
 
-            return toast.error("Login failed", {
+            return toast.error("Login failed please continue with google", {
               position: "bottom-center",
               autoClose: 3000,
               hideProgressBar: false,
@@ -225,12 +225,12 @@ const Login: React.FC = () => {
                       >
                         Password
                       </label>
-                      <a
+                      <Link
                         className="text-sm text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="../examples/html/recover-account.html"
+                        to="/reset"
                       >
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                     <div className="relative">
                       <input

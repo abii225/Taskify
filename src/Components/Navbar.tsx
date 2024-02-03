@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContextApi";
 
 const Navbar: React.FC = () => {
+  const { user }: any = useContext(AuthContext);
   const [isNavOpen, setNavOpen] = useState(false);
 
   const toggleNav = () => {
@@ -19,7 +21,11 @@ const Navbar: React.FC = () => {
             className="flex-none text-xl font-primary  dark:text-white"
             to="/"
           >
-            Taskify
+            <img
+              className="w-[120px] h-[50px]"
+              src="https://i.ibb.co/zHfS87t/logo.png"
+              alt="Taskify"
+            />
           </Link>
           <div className="sm:hidden">
             <button
@@ -47,24 +53,30 @@ const Navbar: React.FC = () => {
             >
               Home
             </Link>
-            <Link
-              className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              to="/signup"
-            >
-              signup
-            </Link>
-            <Link
-              className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              to="/login"
-            >
-              signin
-            </Link>
-            <Link
-              className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              to="/profile"
-            >
-              Profile
-            </Link>
+            {!user && (
+              <Link
+                className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                to="/signup"
+              >
+                signup
+              </Link>
+            )}
+            {!user && (
+              <Link
+                className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                to="/login"
+              >
+                signin
+              </Link>
+            )}
+            {user && (
+              <Link
+                className="font-primary text-[16px] text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                to="/profile"
+              >
+                Profile
+              </Link>
+            )}
           </div>
         </div>
       </nav>

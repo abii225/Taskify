@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import Todolist from "./Todolist";
 import { AuthContext } from "../Context/AuthContextApi";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   addDoc,
   collection,
@@ -47,7 +49,18 @@ const Category: React.FC = () => {
 
       // later...
       await setDoc(newCityRef, todo);
-
+      // alert("hi");
+      toast.success("Task Added", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
       return setTodo({
         name: "",
         priority: "Low",
@@ -57,11 +70,35 @@ const Category: React.FC = () => {
         userId: user.uid,
       });
     } catch (err) {
-      alert("Error on adding new todos");
+      // alert("Error on adding new todos");
+      return toast.error("Adding new task failed", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
     }
   };
   return (
-    <div className="max-w-[1600px] mx-auto">
+    <div className="max-w-[1600px] mx-auto mb-[30px]">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Zoom}
+      />
       <nav className=" w-[90%] max-w-[1600px] mx-auto relative z-0 flex border rounded-md overflow-hidden text-white my-[30px]">
         <button
           type="button"

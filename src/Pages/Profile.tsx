@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 import { AuthContext } from "../Context/AuthContextApi";
+import ProfileEdit from "../Components/ProfileEdit";
+import { useNavigate } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const { user }: any = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  if (!user) {
+    navigate("/signup");
+  }
 
   const SignOutUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log("user before signout", user);
@@ -18,23 +26,34 @@ const Profile: React.FC = () => {
         console.log("error occur at signout", error);
       });
   };
+
+  useEffect(() => {}, [user]);
   return (
-    <div className="min-h-[600px]">
-      <div className="min-w-[250px] max-w-[350px] h-[400px] bg-red-700 flex items-center justify-center align-middle">
+    <div className="max-w-[600px] mx-auto min-h-[600px] bg-white flex flex-col align-middle items-center">
+      <div className="w-[250px] h-[300px] bg-white flex items-center justify-center align-middle">
         <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          src={user ? user.photoURL : "hey"}
           className="w-[80%] h-[80%] object-contain rounded-md"
           alt=""
         />
       </div>
-      username: <br />
-      update password:
-      <button
-        className="w-[200px] h-[50px] bg-red-600"
-        onClick={(e) => SignOutUser(e)}
-      >
-        Logout
-      </button>
+      <div className="flex flex-col gap-1 items-center align-middle ">
+        <h1 className="text-[15px] font-primary font-semibold">
+          User :{user ? user.displayName : "user"}
+        </h1>
+        <h1 className="text-[15px] font-primary font-semibold">
+          E-mail : {user ? user.email : "taskify@gmail.com"}
+        </h1>
+        <ProfileEdit />
+
+        <br />
+        <button
+          className="w-[200px] h-[50px] p-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
+          onClick={(e) => SignOutUser(e)}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,12 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { auth } from "../Firebase/firebase.ts";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Google from "../Components/Google.tsx";
+import { AuthContext } from "../Context/AuthContextApi.tsx";
 
 interface SignupForm {
   email: string;
@@ -14,6 +15,12 @@ interface SignupForm {
   isChecked: boolean;
 }
 const Signup: FC = () => {
+  const { user }: any = useContext(AuthContext);
+  const navigate = useNavigate();
+  if (user) {
+    navigate("/");
+  }
+
   const [form, setForm] = useState<SignupForm>({
     email: "",
     password: "",

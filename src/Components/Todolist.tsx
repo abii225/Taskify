@@ -9,6 +9,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineDone } from "react-icons/md";
 import { doc, deleteDoc } from "firebase/firestore";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import Edit from "./Edit";
@@ -57,6 +59,17 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
     console.log(ele);
     let id: string = ele.id;
     await deleteDoc(doc(db, "todos", id));
+    toast.success("Task deleted", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Zoom,
+    });
   };
 
   // ============================  change status ===================
@@ -69,6 +82,19 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
   // };
   return (
     <div className="w-[100%]  min-h-[400px]  bg-body grid grid-cols-1 md:grid-cols-3 gap-3">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Zoom}
+      />
       {!allTodo.length && (
         <h1 className="text-[30px] text-black font-primary text-center ">
           Empty {value} tasklist
@@ -95,7 +121,7 @@ const Todolist: React.FC<TodolistProps> = ({ value }) => {
               </div>
               <div className="w-[100%] h-[100px] overflow-y-scroll p-2 shadow-md scrollbar-thin scrollbar-track-table scrollbar-rounded-md scrollbar-thumb-slate-700 text-[14px] md:text-[16px] mt-[15px]">
                 {" "}
-                <span className="text-white font-primary underline">
+                <span className="text-white font-primary font-semibold">
                   {" "}
                   {doc.name}
                 </span>
