@@ -14,20 +14,22 @@ const Profile: React.FC = () => {
     navigate("/signup");
   }
 
-  const SignOutUser = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("user before signout", user);
+  const SignOutUser = async () => {
+    // console.log("user before signout", user);
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("signout success", user);
+        // console.log("signout success", user);
       })
-      .catch((error) => {
+      .catch(() => {
         // An error happened.
-        console.log("error occur at signout", error);
+        // console.log("error occur at signout", error);
       });
   };
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    // console.log(user);
+  }, [user.displayName, user.photoURL]);
   return (
     <div className="max-w-[600px] mx-auto min-h-[600px] bg-white flex flex-col align-middle items-center">
       <div className="w-[250px] h-[300px] bg-white flex items-center justify-center align-middle">
@@ -49,7 +51,7 @@ const Profile: React.FC = () => {
         <br />
         <button
           className="w-[200px] h-[50px] p-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
-          onClick={(e) => SignOutUser(e)}
+          onClick={() => SignOutUser()}
         >
           Logout
         </button>

@@ -22,7 +22,7 @@ const ProfileEdit: React.FC = () => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       // Update the state with the selected file
-      console.log(e.target.files[0]);
+      // console.log(e.target.files[0]);
       const selectedImage = e.target.files[0]; //explicitly assign the file
       setProfile((prev) => ({ ...prev, image: selectedImage }));
     }
@@ -34,11 +34,11 @@ const ProfileEdit: React.FC = () => {
 
     // 'file' comes from the Blob or File API
     let image: any = profile.image;
-    uploadBytes(imagestorageRef, image).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
+    uploadBytes(imagestorageRef, image).then(() => {
+      // console.log("Uploaded a blob or file!");
       getDownloadURL(imagestorageRef)
         .then((url) => {
-          console.log("success", url);
+          // console.log("success", url);
           //   return url;
           const currentUser = auth.currentUser;
           if (currentUser) {
@@ -50,16 +50,17 @@ const ProfileEdit: React.FC = () => {
               .then(() => {
                 // Profile updated!
                 // ...
-                console.log(user);
+                // console.log(user);
               })
-              .catch((error) => {
+              .catch(() => {
                 // An error occurred
                 // ...
+                // console.log(error);
               });
           }
         })
         .catch((err: any) => {
-          console.log(err);
+          alert(err);
         });
     });
   };

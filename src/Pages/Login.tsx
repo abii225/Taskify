@@ -4,8 +4,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextApi";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../Firebase/firebase";
+
+import { auth } from "../Firebase/firebase";
 import Google from "../Components/Google";
 
 interface login {
@@ -44,23 +44,25 @@ const Login: React.FC = () => {
           theme: "colored",
           transition: Zoom,
         });
-      } else if (!loginForm.isChecked) {
-        return toast.warn("please accept our terms and conditions!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Zoom,
-        });
-      } else {
+      }
+      // else if (!loginForm.isChecked) {
+      //   return toast.warn("please accept our terms and conditions!", {
+      //     position: "bottom-center",
+      //     autoClose: 3000,
+      //     hideProgressBar: false,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //     theme: "colored",
+      //     transition: Zoom,
+      //   });
+      // }
+      else {
         signInWithEmailAndPassword(auth, loginForm.email, loginForm.password)
-          .then((userCredential) => {
+          .then(() => {
             // Signed up
-            const user = userCredential.user;
+            // const user = userCredential.user;
             // console.log(user);
             // signin success
             toast.success("Login Success!", {
@@ -76,11 +78,11 @@ const Login: React.FC = () => {
             });
             // ...
           })
-          .catch((error: any) => {
-            const errorCode = error.code;
-            const errorMessage = error;
-
-            return toast.error("Login failed please continue with google", {
+          .catch(() => {
+            // const errorCode = error.code;
+            // const errorMessage = error;
+            // console.log(errorCode + errorMessage);
+            return toast.error("Login failed , Please Continue with google", {
               position: "bottom-center",
               autoClose: 3000,
               hideProgressBar: false,
@@ -92,12 +94,12 @@ const Login: React.FC = () => {
               transition: Zoom,
             });
 
-            console.log(errorCode);
+            // console.log(errorCode);
             // ..
           });
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -193,7 +195,7 @@ const Login: React.FC = () => {
                           })
                         }
                       />
-                      <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <div className="hidden absolute inset-y-0 end-0  items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
                           width="16"
@@ -246,7 +248,7 @@ const Login: React.FC = () => {
                           })
                         }
                       />
-                      <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <div className="hidden absolute inset-y-0 end-0  items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
                           width="16"
@@ -276,7 +278,7 @@ const Login: React.FC = () => {
                         name="remember-me"
                         type="checkbox"
                         className=""
-                        onChange={(e) =>
+                        onChange={() =>
                           setLoginForm((prev) => {
                             return { ...prev, isChecked: !loginForm.isChecked };
                           })

@@ -1,9 +1,5 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
-import {
-  signOut,
-  onAuthStateChanged,
-  User as FirebaseAuthUser,
-} from "firebase/auth";
+import { onAuthStateChanged, User as FirebaseAuthUser } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 
 // Define the context type
@@ -20,13 +16,14 @@ const AuthContextApi: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<FirebaseAuthUser | null>(null);
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
     let unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        console.log(user, "here is the signed in user");
+        // const uid = user.uid;
+        // console.log(uid + 123400000000000000000000000n);
+        // console.log(user, "here is the signed in user");
         setUser(user);
         // ...
       } else {

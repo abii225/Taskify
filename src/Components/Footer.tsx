@@ -7,18 +7,18 @@ const Footer: React.FC = () => {
       <footer className="w-full max-w-[1600px] py-10 px-4 sm:px-6 lg:px-8 mx-auto  bg-item2 text-white">
         {/* <!-- Grid --> */}
         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-5 text-center">
-          <div>
-            {/* <Link
-              className="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          <div className="w-[200px]  mx-auto">
+            <Link
+              className="flex-none text-xl font-semibold block mx-auto text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
               to="/"
               aria-label="Brand"
             >
               <img
-                className="w-[120px] h-[50px]"
+                className="w-[120px] h-[50px] block mx-auto"
                 src="https://i.ibb.co/zHfS87t/logo.png"
                 alt="Taskify"
               />
-            </Link> */}
+            </Link>
           </div>
           {/* <!-- End Col --> */}
 

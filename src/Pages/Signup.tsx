@@ -1,5 +1,5 @@
 import { FC, useContext, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase/firebase.ts";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 
@@ -73,7 +73,7 @@ const Signup: FC = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            // console.log(user);
+            console.log(user);
             // signin success
             toast.success("🦄 Wow so easy!", {
               position: "bottom-center",
@@ -89,10 +89,11 @@ const Signup: FC = () => {
             // ...
           })
           .catch((error: any) => {
-            const errorCode = error.code;
-            const errorMessage = error;
-            if (errorCode == "auth/email-already-in-use") {
-              return toast.error("Email already in use", {
+            // const errorCode = error.code;
+            // const errorMessage = error;
+            // console.log(errorMessage);
+            if (error) {
+              return toast.error("Register Failed", {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -208,7 +209,7 @@ const Signup: FC = () => {
                           })
                         }
                       />
-                      <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <div className="hidden absolute inset-y-0 end-0  items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
                           width="16"
@@ -254,7 +255,7 @@ const Signup: FC = () => {
                           })
                         }
                       />
-                      <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <div className="hidden absolute inset-y-0 end-0  items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
                           width="16"
@@ -299,7 +300,7 @@ const Signup: FC = () => {
                           })
                         }
                       />
-                      <div className="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+                      <div className="hidden absolute inset-y-0 end-0  items-center pointer-events-none pe-3">
                         <svg
                           className="h-5 w-5 text-red-500"
                           width="16"
@@ -330,7 +331,7 @@ const Signup: FC = () => {
                         type="checkbox"
                         className=""
                         value={form.isChecked ? "true" : "false"}
-                        onChange={(e) =>
+                        onChange={() =>
                           setForm((prev) => {
                             return { ...prev, isChecked: !form.isChecked };
                           })

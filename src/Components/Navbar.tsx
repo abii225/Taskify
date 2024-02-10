@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextApi";
-
+import { GiHamburgerMenu } from "react-icons/gi";
+import { TfiClose } from "react-icons/tfi";
 const Navbar: React.FC = () => {
   const { user }: any = useContext(AuthContext);
   const [isNavOpen, setNavOpen] = useState(false);
@@ -35,6 +36,7 @@ const Navbar: React.FC = () => {
               aria-label="Toggle navigation"
             >
               {/* Toggle button content */}
+              {!isNavOpen ? <GiHamburgerMenu /> : <TfiClose />}
             </button>
           </div>
         </div>

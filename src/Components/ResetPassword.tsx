@@ -14,9 +14,10 @@ const ResetPassword: React.FC = () => {
           // ..
           alert("mail is sent");
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+        .catch(() => {
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
+          // console.log(errorCode + errorMessage);
           // ..
         });
     } else {

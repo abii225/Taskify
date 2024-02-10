@@ -3,18 +3,8 @@ import Todolist from "./Todolist";
 import { AuthContext } from "../Context/AuthContextApi";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
-import { onSnapshot } from "firebase/firestore";
 
 export interface todo {
   name: string;
@@ -229,8 +219,8 @@ const Category: React.FC = () => {
             ></textarea>
             <br />
             <button
-              className="w-[90%] h-[50px] bg-blue-600 block mx-auto hover:bg-blue-500 cursor-pointer rounded-md"
-              onClick={(e) => addtoFirebase()}
+              className="w-[90%] h-[50px] bg-blue-600 block mx-auto hover:bg-blue-500 text-white font-primary cursor-pointer rounded-md"
+              onClick={() => addtoFirebase()}
             >
               Add{" "}
             </button>

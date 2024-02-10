@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "flowbite-react";
 import { FaRegEdit } from "react-icons/fa";
-import { todo } from "./Category";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 // ====================================
@@ -29,7 +28,7 @@ interface todoModel {
 }
 // assigning the recieving props
 const Edit: React.FC<EditProps> = ({ ele }) => {
-  console.log(ele, "open modal");
+  // console.log(ele, "open modal");
   const [openModal, setOpenModal] = useState(false);
 
   const [edit, setEditTodo] = useState<todoModel>({
@@ -44,7 +43,7 @@ const Edit: React.FC<EditProps> = ({ ele }) => {
 
   // =================================  update a todo ===============
   const updateTodo = async (e: any) => {
-    console.log(e, "updated before call");
+    // console.log(e, "updated before call");
 
     const todoRef = doc(db, "todos", e.id);
 
@@ -60,7 +59,7 @@ const Edit: React.FC<EditProps> = ({ ele }) => {
 
   return (
     <>
-      <div>
+      <div className="">
         <Button className="bg-item2 p-0" onClick={() => setOpenModal(true)}>
           <FaRegEdit className="w-[20px] h-[20px]" />
         </Button>
@@ -140,13 +139,13 @@ const Edit: React.FC<EditProps> = ({ ele }) => {
                   }
                 ></textarea>
               </label>
-              <label htmlFor="" className="flex gap-2">
+              <label htmlFor="" className="flex gap-2 items-center">
                 <h1>Completed</h1>
                 <input
                   type="checkbox"
                   name=""
                   checked={edit.completed}
-                  onChange={(e) =>
+                  onChange={() =>
                     setEditTodo((prev) => {
                       return { ...prev, completed: !edit.completed };
                     })
