@@ -8,7 +8,7 @@
 # Taskify
 Our project aims to raise funds for disadvantaged children in Africa. You can register an account, log in, and contribute to the cause. Additionally, you have the opportunity to volunteer and create your own fundraising efforts. 
 
-**Vercel :**  [Be Charity Website](https://becharity.vercel.app/)
+**Vercel :**  [Taskify Website](link here)
 ## Tech Stack
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) 
